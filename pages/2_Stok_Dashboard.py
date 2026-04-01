@@ -5,9 +5,9 @@ import config
 
 client = connect()
 
-trans = get_data(client, config.SPREADSHEET_NAME, config.SHEET_TRANSACTIONS)
-sales = get_data(client, config.SPREADSHEET_NAME, config.SHEET_SALES)
-recipe = get_data(client, config.SPREADSHEET_NAME, config.SHEET_RECIPE)
+trans = get_data(client, config.SPREADSHEET_ID, config.SHEET_TRANSACTIONS)
+sales = get_data(client, config.SPREADSHEET_ID, config.SHEET_SALES)
+recipe = get_data(client, config.SPREADSHEET_ID, config.SHEET_RECIPE)
 
 stock = calculate_stock(trans, sales, recipe)
 
