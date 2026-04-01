@@ -5,7 +5,7 @@ import config
 
 client = connect()
 
-df = get_data(client, config.SPREADSHEET_NAME, config.SHEET_TRANSACTIONS)
+df = get_data(client, config.SPREADSHEET_ID, config.SHEET_TRANSACTIONS)
 
 user_filter = st.selectbox(
     "Filter User",
