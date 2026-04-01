@@ -1,21 +1,73 @@
+import streamlit as st
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
+from oauth2client.service_account import ServiceAccountCredentials
 
+
+# =============================
+# CONNECT TO GOOGLE SHEETS
+# =============================
 def connect():
-    scope = [
-        "https://spreadsheets.google.com/feeds",
-        "https://www.googleapis.com/auth/drive"
-    ]
-    creds = ServiceAccountCredentials.from_json_keyfile_name(
-        "credentials.json", scope
-    )
-    return gspread.authorize(creds)
+    try:
+        scope = [
+            "https://spreadsheets.google.com/feeds",
+            "https://www.googleapis.com/auth/drive",
+        ]
 
-def get_data(client, sheet, worksheet):
-    ws = client.open(sheet).worksheet(worksheet)
-    return pd.DataFrame(ws.get_all_records())
+        # Ambil dari Streamlit Secrets
+        creds_dict = st.secrets["gcp_service_account"]
 
-def append_row(client, sheet, worksheet, row):
-    ws = client.open(sheet).worksheet(worksheet)
-    ws.append_row(row)
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(
+            creds_dict, scope
+        )
+
+        client = gspread.authorize(creds)
+
+        return client
+
+    except Exception as e:
+        st.error(f"Gagal koneksi ke Google Sheets: {e}")
+        return None
+
+
+# =============================
+# GET DATA
+# =============================
+def get_data(client, spreadsheet_id, sheet_name):
+    try:
+        sheet = client.open_by_key(spreadsheet_id).worksheet(sheet_name)
+        data = sheet.get_all_records()
+        df = pd.DataFrame(data)
+        return df
+
+    except Exception as e:
+        st.error(f"Gagal ambil data dari sheet {sheet_name}: {e}")
+        return pd.DataFrame()
+
+
+# =============================
+# APPEND DATA
+# =============================
+def append_row(client, spreadsheet_id, sheet_name, row_data):
+    try:
+        sheet = client.open_by_key(spreadsheet_id).worksheet(sheet_name)
+        sheet.append_row(row_data)
+        return True
+
+    except Exception as e:
+        st.error(f"Gagal tambah data ke sheet {sheet_name}: {e}")
+        return False
+
+
+# =============================
+# CLEAR SHEET (OPTIONAL)
+# =============================
+def clear_sheet(client, spreadsheet_id, sheet_name):
+    try:
+        sheet = client.open_by_key(spreadsheet_id).worksheet(sheet_name)
+        sheet.clear()
+        return True
+
+    except Exception as e:
+        st.error(f"Gagal clear sheet {sheet_name}: {e}")
+        return False
