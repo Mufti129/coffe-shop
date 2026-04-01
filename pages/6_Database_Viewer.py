@@ -13,7 +13,7 @@ tables = {
 
 choice = st.selectbox("Pilih Data", list(tables.keys()))
 
-df = get_data(client, config.SPREADSHEET_NAME, tables[choice])
+df = get_data(client, config.SPREADSHEET_ID, tables[choice])
 
 st.dataframe(df)
 
