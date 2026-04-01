@@ -5,7 +5,8 @@ def date_filter(df):
     start = st.date_input("Dari")
     end = st.date_input("Sampai")
 
-    df['tanggal'] = pd.to_datetime(df['tanggal'])
+    df['tanggal'] = pd.to_datetime(df['tanggal'],
+    errors='coerce')
 
     return df[
         (df['tanggal'] >= pd.to_datetime(start)) &
