@@ -6,8 +6,8 @@ import config
 
 client = connect()
 
-sales = get_data(client, config.SPREADSHEET_NAME, config.SHEET_SALES)
-recipe = get_data(client, config.SPREADSHEET_NAME, config.SHEET_RECIPE)
+sales = get_data(client, config.SPREADSHEET_ID, config.SHEET_SALES)
+recipe = get_data(client, config.SPREADSHEET_ID, config.SHEET_RECIPE)
 
 sales = date_filter(sales)
 
