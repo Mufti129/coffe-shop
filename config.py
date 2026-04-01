@@ -1,5 +1,5 @@
-SPREADSHEET_NAME = "coffee_shop_db"
-
+#SPREADSHEET_NAME = "coffee_shop_db"
+SPREADSHEET_ID = "13wQcCXIYRb__HO-Vb0Zm_f77u9628uKt4YDgD94IpiY"
 SHEET_TRANSACTIONS = "transactions"
 SHEET_PRODUCTS = "products"
 SHEET_SALES = "sales"
