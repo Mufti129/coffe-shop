@@ -14,7 +14,7 @@ keterangan = st.text_input("Keterangan")
 user = st.text_input("Nama Staff")
 
 if st.button("Simpan"):
-    append_row(client, config.SPREADSHEET_NAME, config.SHEET_TRANSACTIONS, [
+    append_row(client, config.SPREADSHEET_ID, config.SHEET_TRANSACTIONS, [
         str(date.today()), produk, tipe, int(qty), keterangan, user
     ])
     st.success("✅ Data berhasil disimpan")
