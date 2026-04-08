@@ -14,5 +14,5 @@ sales = date_filter(sales)
 usage = calculate_usage(sales, recipe)
 summary = usage.groupby('produk')['qty'].sum().reset_index()
 
-st.title("📉 Pemakaian Bahan")
+st.title("Pemakaian Bahan")
 st.dataframe(summary)
