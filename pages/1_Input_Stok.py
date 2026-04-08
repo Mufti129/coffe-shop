@@ -5,7 +5,7 @@ from datetime import datetime
 
 client = connect()
 
-st.title("📥 Input Stok")
+st.title("Input Stok")
 
 # =========================
 # MASTER DATA (BISA DIPINDAH KE SHEET NANTI)
