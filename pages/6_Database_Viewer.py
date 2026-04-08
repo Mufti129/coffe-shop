@@ -20,7 +20,7 @@ st.dataframe(df)
 csv = df.to_csv(index=False).encode('utf-8')
 
 st.download_button(
-    "⬇️ Download CSV",
+    "Download CSV",
     csv,
     file_name=f"{choice}.csv",
     mime="text/csv"
